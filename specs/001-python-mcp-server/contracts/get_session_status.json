@@ -1,0 +1,52 @@
+{
+  "name": "get_session_status",
+  "description": "Get the current status of a running or completed query session",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "session_id": {
+        "type": "string",
+        "description": "The session ID returned from start_query"
+      }
+    },
+    "required": ["session_id"]
+  },
+  "response": {
+    "type": "object",
+    "properties": {
+      "session_id": {
+        "type": "string"
+      },
+      "status": {
+        "type": "string",
+        "enum": ["running", "completed", "failed", "cancelled"],
+        "description": "Current session status"
+      },
+      "query": {
+        "type": "string",
+        "description": "The SQL query being executed"
+      },
+      "start_time": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "end_time": {
+        "type": "string",
+        "format": "date-time",
+        "description": "When the session completed (null if still running)"
+      },
+      "duration_seconds": {
+        "type": "number",
+        "description": "How long the query has been running or total duration"
+      },
+      "row_count": {
+        "type": "integer",
+        "description": "Number of rows returned (0 if still running or failed)"
+      },
+      "error": {
+        "type": "string",
+        "description": "Error message if status is 'failed'"
+      }
+    }
+  }
+}

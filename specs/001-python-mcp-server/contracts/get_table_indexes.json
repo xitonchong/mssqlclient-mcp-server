@@ -1,0 +1,62 @@
+{
+  "name": "get_table_indexes",
+  "description": "Get detailed index information for a table including columns, types, and properties",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "table_name": {
+        "type": "string",
+        "description": "Name of the table (with or without schema prefix)"
+      },
+      "database_name": {
+        "type": "string",
+        "description": "Database name (required in server mode)"
+      }
+    },
+    "required": ["table_name"]
+  },
+  "response": {
+    "type": "object",
+    "properties": {
+      "table_name": {
+        "type": "string",
+        "description": "Full table name with schema"
+      },
+      "indexes": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "index_name": {
+              "type": "string",
+              "description": "Name of the index"
+            },
+            "index_type": {
+              "type": "string",
+              "description": "Type (CLUSTERED, NONCLUSTERED, HEAP, etc.)"
+            },
+            "is_primary_key": {
+              "type": "boolean"
+            },
+            "is_unique": {
+              "type": "boolean"
+            },
+            "columns": {
+              "type": "array",
+              "items": {"type": "string"},
+              "description": "Indexed columns in order"
+            },
+            "included_columns": {
+              "type": "array",
+              "items": {"type": "string"},
+              "description": "Included (non-key) columns"
+            }
+          }
+        }
+      },
+      "index_count": {
+        "type": "integer"
+      }
+    }
+  }
+}

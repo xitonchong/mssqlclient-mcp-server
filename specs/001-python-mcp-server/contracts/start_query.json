@@ -1,0 +1,48 @@
+{
+  "name": "start_query",
+  "description": "Start a SQL query execution in a background session. The query runs asynchronously and results can be retrieved later using get_session_result. Requires ENABLE_START_QUERY=true.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "query": {
+        "type": "string",
+        "description": "The SQL query to execute"
+      },
+      "database_name": {
+        "type": "string",
+        "description": "Optional database name (if in server mode). Uses connection string database if not specified."
+      },
+      "timeout_seconds": {
+        "type": "integer",
+        "description": "Query timeout in seconds (default: 30, max: 600)",
+        "minimum": 1,
+        "maximum": 600,
+        "default": 30
+      }
+    },
+    "required": ["query"]
+  },
+  "response": {
+    "type": "object",
+    "properties": {
+      "session_id": {
+        "type": "string",
+        "description": "Unique session ID to track this query"
+      },
+      "status": {
+        "type": "string",
+        "enum": ["running"],
+        "description": "Initial status (always 'running')"
+      },
+      "start_time": {
+        "type": "string",
+        "format": "date-time",
+        "description": "When the query started (ISO 8601)"
+      },
+      "message": {
+        "type": "string",
+        "description": "Human-readable status message"
+      }
+    }
+  }
+}

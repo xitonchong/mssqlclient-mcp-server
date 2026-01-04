@@ -1,0 +1,49 @@
+{
+  "name": "get_server_capabilities",
+  "description": "Get SQL Server version, edition, and supported features. Results are cached for 1 hour per connection string.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "database_name": {
+        "type": "string",
+        "description": "Optional database name (for server mode)"
+      }
+    }
+  },
+  "response": {
+    "type": "object",
+    "properties": {
+      "version": {
+        "type": "string",
+        "description": "Full SQL Server version string"
+      },
+      "major_version": {
+        "type": "integer",
+        "description": "Major version number (e.g., 15 for SQL Server 2019)"
+      },
+      "edition": {
+        "type": "string",
+        "description": "SQL Server edition (e.g., 'Enterprise Edition')"
+      },
+      "deployment_type": {
+        "type": "string",
+        "enum": ["Azure SQL Database", "Azure Virtual Machine", "On-Premises"],
+        "description": "Where SQL Server is deployed"
+      },
+      "features": {
+        "type": "object",
+        "description": "Supported features",
+        "properties": {
+          "json": {"type": "boolean", "description": "JSON support (SQL 2016+)"},
+          "columnstore": {"type": "boolean", "description": "Columnstore indexes (SQL 2012+)"},
+          "temporal_tables": {"type": "boolean", "description": "Temporal tables (SQL 2016+)"},
+          "row_level_security": {"type": "boolean", "description": "Row-level security (SQL 2016+)"},
+          "in_memory_oltp": {"type": "boolean", "description": "In-Memory OLTP (SQL 2014+)"},
+          "graph_database": {"type": "boolean", "description": "Graph database (SQL 2017+)"},
+          "always_encrypted": {"type": "boolean", "description": "Always Encrypted (SQL 2016+)"},
+          "query_store": {"type": "boolean", "description": "Query Store (SQL 2016+)"}
+        }
+      }
+    }
+  }
+}

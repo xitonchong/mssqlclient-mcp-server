@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  mssqlclient-mcp:
+    build: .
+    image: mssqlclient-mcp-python:latest
+    environment:
+      # Required
+      - MSSQL_CONNECTIONSTRING=${MSSQL_CONNECTIONSTRING}
+
+      # Optional - Tool enablement
+      - ENABLE_EXECUTE_QUERY=${ENABLE_EXECUTE_QUERY:-false}
+      - ENABLE_EXECUTE_STORED_PROCEDURE=${ENABLE_EXECUTE_STORED_PROCEDURE:-false}
+      - ENABLE_START_QUERY=${ENABLE_START_QUERY:-false}
+      - ENABLE_START_STORED_PROCEDURE=${ENABLE_START_STORED_PROCEDURE:-false}
+
+      # Optional - Timeouts
+      - DEFAULT_COMMAND_TIMEOUT_SECONDS=${DEFAULT_COMMAND_TIMEOUT_SECONDS:-30}
+      - CONNECTION_TIMEOUT_SECONDS=${CONNECTION_TIMEOUT_SECONDS:-15}
+      - TOTAL_TOOL_CALL_TIMEOUT_SECONDS=${TOTAL_TOOL_CALL_TIMEOUT_SECONDS:-120}
+
+    stdin_open: true
+    tty: true
+
+    # Uncomment if you need to connect to SQL Server on host machine
+    # network_mode: "host"

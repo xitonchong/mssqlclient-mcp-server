@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "mssqlclient": {
+      "type": "stdio",
+      "command": "/Users/chongcheekeong/code/MCP/mssqlclient-mcp-server/python-mcp-server/.venv/bin/python",
+      "args": ["-m", "mssqlclient_mcp.server"],
+      "cwd": "/Users/chongcheekeong/code/MCP/mssqlclient-mcp-server/python-mcp-server",
+      "env": {
+        "MSSQL_CONNECTIONSTRING": "DRIVER={ODBC Driver 17 for SQL Server};Server=localhost,1433;Database=master;UID=sa;PWD=YourStrongPassword123\\!;TrustServerCertificate=yes;",
+        "ENABLE_EXECUTE_QUERY": "true",
+        "ENABLE_EXECUTE_STORED_PROCEDURE": "true",
+        "ENABLE_START_QUERY": "true",
+        "ENABLE_START_STORED_PROCEDURE": "true",
+        "DEFAULT_COMMAND_TIMEOUT_SECONDS": "30",
+        "CONNECTION_TIMEOUT_SECONDS": "15",
+        "MAX_CONCURRENT_SESSIONS": "10",
+        "SESSION_CLEANUP_INTERVAL_MINUTES": "60",
+        "TOTAL_TOOL_CALL_TIMEOUT_SECONDS": "120"
+      }
+    }
+  }
+}

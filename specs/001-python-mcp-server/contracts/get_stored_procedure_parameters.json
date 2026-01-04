@@ -1,0 +1,63 @@
+{
+  "name": "get_stored_procedure_parameters",
+  "description": "Discover the parameters for a stored procedure including types, directions, and default values",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "procedure_name": {
+        "type": "string",
+        "description": "Name of the stored procedure (with or without schema prefix)"
+      },
+      "database_name": {
+        "type": "string",
+        "description": "Database name (required in server mode)"
+      }
+    },
+    "required": ["procedure_name"]
+  },
+  "response": {
+    "type": "object",
+    "properties": {
+      "procedure_name": {
+        "type": "string",
+        "description": "Full procedure name with schema"
+      },
+      "parameters": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "parameter_name": {
+              "type": "string",
+              "description": "Parameter name with @ prefix"
+            },
+            "data_type": {
+              "type": "string",
+              "description": "SQL data type (e.g., 'int', 'nvarchar')"
+            },
+            "max_length": {
+              "type": "integer",
+              "description": "Maximum length for string/binary types"
+            },
+            "is_output": {
+              "type": "boolean",
+              "description": "True if OUTPUT parameter"
+            },
+            "is_required": {
+              "type": "boolean",
+              "description": "True if parameter has no default value"
+            },
+            "default_value": {
+              "type": "string",
+              "description": "Default value if any"
+            }
+          }
+        }
+      },
+      "parameter_count": {
+        "type": "integer",
+        "description": "Total number of parameters"
+      }
+    }
+  }
+}
