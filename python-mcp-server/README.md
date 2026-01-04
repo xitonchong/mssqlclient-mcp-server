@@ -10,6 +10,17 @@ The MCP client operates in one of two modes:
 - **Database Mode**: When a specific database is specified in the connection string, only operations within that database context are available
 - **Server Mode**: When no database is specified in the connection string, server-wide operations across all databases are available
 
+## How to Login into MSSQL database 
+```bash
+sqlcmd -S localhost,1433 -U sa -P 'YourStrongPassword123\!'   
+```
+once login, 
+use testdb; 
+go
+then it will show the result after go; 
+
+
+
 ## Features
 
 ### Core Database Operations
